@@ -5,6 +5,11 @@ class Display a where
 
 
 -- instances of Display for things which will just call Show
+instance Display Bool where
+  display = show
+
+instance Display Char where
+  display = show 
 
 instance Display Int where 
   display = show 
@@ -18,13 +23,20 @@ instance Display Float where
 instance Display Double where 
   display = show
 
-instance Display Char where
+instance Display Ordering where 
+  display = show 
+
+instance Display Word where 
   display = show
 
-instance Display Bool where
+instance Display () where 
   display = show 
 
 instance (Show a) => Display [a] where
   display = show 
+
+instance (Show a) => Display (Maybe a) where 
+  display = show 
+
 
 
