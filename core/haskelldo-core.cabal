@@ -39,7 +39,8 @@ executable haskelldo-core
                      , Types
                      , Interpreter
                      , Utils
-                     , Display
+                     , Displayable
+                     , DisplayTypes
   default-language:    Haskell2010
 
 test-suite haskelldo-test
