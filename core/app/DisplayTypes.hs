@@ -5,6 +5,7 @@ module DisplayTypes where
 import GHC.Generics
 import Data.Aeson 
 
+
 -- |
 -- Displayable takes a type and wraps it in a Display
 -- Display will be used in HaskellDO to handle media rendering
@@ -17,8 +18,6 @@ class Displayable a where
 -- E.g adding a display for latex would add the type DisplayLatex here
 data DisplayType
   = DisplayText
-  | DisplayJpg 
-  | DisplayPng 
   | DisplayHtml
   deriving Generic
 

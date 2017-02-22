@@ -1,16 +1,24 @@
--- |
--- Module     : Display-HaskellDO
--- License    : Apache
--- Stability  : Experimental
---
--- Display-HaskellDO - An API to display media in HaskellDO
+{-# LANGUAGE TypeSynonymInstances, FlexibleInstances, UndecidableInstances #-}
 
 module Displayable where 
 
 import DisplayTypes 
 import Data.Functor.Identity
+import Frames
+import Data.Vinyl.TypeLevel (RecAll)
+import Text.Blaze.Html5 (toHtml)
+import Text.Blaze.Html.Renderer.Text (renderHtml)
+import Data.Text.Lazy (toChunks)
+import qualified Data.Vinyl.Functor as V
 import qualified Data.Text as T
 
+instance (RecAll V.Identity r Show, ColumnHeaders r, AsVinyl r) => Displayable (Record r) where
+  display rec = Display DisplayHtml h 
+    where 
+      h = (T.unpack . T.concat . toChunks . renderHtml) (toHtml $ show rec)
+
+-- Instances which should just be displayed by the console as usual
+-- Lovingly referred to as the "Show" instances
 instance Displayable Bool where 
   display b = Display DisplayText (show b)
 

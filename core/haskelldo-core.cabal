@@ -35,6 +35,12 @@ executable haskelldo-core
                      , wai-websockets
                      , servant-server
                      , directory
+                     , Frames
+                     , Chart-diagrams
+                     , Chart
+                     , vinyl
+                     , blaze-html
+                     , blaze-markup
   other-modules:       WebSocketServer
                      , Types
                      , Interpreter
