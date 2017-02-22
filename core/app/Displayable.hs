@@ -12,6 +12,7 @@ import Data.Text.Lazy (toChunks)
 import qualified Data.Vinyl.Functor as V
 import qualified Data.Text as T
 
+-- instance of Displayable of Record from Frames package
 instance (RecAll V.Identity r Show, ColumnHeaders r, AsVinyl r) => Displayable (Record r) where
   display rec = Display DisplayHtml html 
     where 
