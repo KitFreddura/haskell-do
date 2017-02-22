@@ -13,9 +13,9 @@ import qualified Data.Vinyl.Functor as V
 import qualified Data.Text as T
 
 instance (RecAll V.Identity r Show, ColumnHeaders r, AsVinyl r) => Displayable (Record r) where
-  display rec = Display DisplayHtml h 
+  display rec = Display DisplayHtml html 
     where 
-      h = (T.unpack . T.concat . toChunks . renderHtml) (toHtml $ show rec)
+      html = (T.unpack . T.concat . toChunks . renderHtml) (toHtml $ show rec)
 
 -- Instances which should just be displayed by the console as usual
 -- Lovingly referred to as the "Show" instances
