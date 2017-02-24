@@ -35,18 +35,20 @@ loadNotebook s = hPutStrLn (ghciInput s) ":r"
 
 writeConsole :: State -> Notebook -> IO ()
 writeConsole s n = do
-  d <- getDisplay $ display $ console n 
-  printDisplay s n d
-  hFlush (ghciInput s)
-  where
-    getDisplay d = case displayType d of 
-      DisplayText -> return $ Right (content d)
-      _ -> return $ Left d
+  let d = getDisplay n $ display $ console n
+  hPutStrLn (ghciInput s) (extractEither d)
+  --hFlush (ghciInput s)
 
-printDisplay :: State -> Notebook -> Either Display String -> IO ()
-printDisplay s n d = case d of 
-      Right _ -> hPutStrLn (ghciInput s) (console n) 
-      Left dis -> hPrint (ghciInput s) dis
+
+extractEither :: (Show a, Show b) => Either a b -> String 
+extractEither e = case e of 
+  Left a -> show a 
+  Right b -> show b
+
+getDisplay :: Notebook -> Display -> Either Display String 
+getDisplay n d = case displayType d of 
+  DisplayText -> Right (console n)
+  _ -> Left d
 
 readConsole :: State -> IO String
 readConsole s = clearHandle (ghciOutput s)
