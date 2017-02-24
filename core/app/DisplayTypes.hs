@@ -40,4 +40,5 @@ instance FromJSON Display
 -- Allows arbitrart Display types to be printed in the console
 -- JSON was chosen for an easy format for the front-end of HaskellDO to parse
 instance Show Display where
-  show = show . toEncoding
+  show (Display DisplayText t) = t 
+  show d = (show . toEncoding) d 

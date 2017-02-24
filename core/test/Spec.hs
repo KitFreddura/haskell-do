@@ -25,7 +25,5 @@ showIsEncode :: Display -> Bool
 showIsEncode d = show (toEncoding d) == show d 
 
 main :: IO ()
-main = do 
-  quickCheck showIsEncode
-  quickCheck getTextTest
+main = quickCheck showIsEncode
 
