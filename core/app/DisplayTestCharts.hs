@@ -11,6 +11,8 @@ import Control.Lens
 setLinesBlue :: PlotLines a b -> PlotLines a b
 setLinesBlue = plot_lines_style  . line_color .~ opaque blue
 
+--you can run display chart in the repl
+
 chart = toRenderable layout
   where
     am :: Double -> Double
