@@ -7,8 +7,8 @@ import qualified Data.Text as T
 import Data.Text.Arbitrary
 import Data.Aeson
 import Test.QuickCheck
-
 -- testing for Displayable instances
+
 instance Arbitrary DisplayType where 
   arbitrary = elements [DisplayText, DisplayHtml]
 
@@ -30,8 +30,8 @@ genTextDisplay :: Gen Display
 genTextDisplay = Display <$> return DisplayText <*> arbitrary
 
 showIsEncode :: Display -> Bool 
-showIsEncode d = show (toEncoding d) == show d 
+showIsEncode d = show (toEncoding d) == show d
+-- frames stuff
 
 main :: IO ()
 main = quickCheck showIsEncode
-

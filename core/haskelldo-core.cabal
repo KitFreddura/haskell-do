@@ -42,12 +42,19 @@ executable haskelldo-core
                      , blaze-html
                      , blaze-markup
                      , data-default-class
+                     , pipes
+                     , lens
+                     , lens-family-core
+                     , foldl
+                     , colour
   other-modules:       WebSocketServer
                      , Types
                      , Interpreter
                      , Utils
                      , Displayable
                      , DisplayTypes
+                     , DisplayTestFrames
+                     , DisplayTestCharts
   default-language:    Haskell2010
 
 test-suite haskelldo-test
@@ -72,6 +79,7 @@ test-suite haskelldo-test
                      , Chart-diagrams 
                      , quickcheck-text
                      , data-default-class
+                     
   other-modules:       DisplayTypes
                      , Displayable
                      , Types 
