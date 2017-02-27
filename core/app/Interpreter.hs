@@ -7,6 +7,7 @@ module Interpreter
 import Types
 import DisplayTypes
 import Displayable
+import Control.Exception
 import Control.Monad.Trans
 import Control.Monad
 import Utils
@@ -35,8 +36,7 @@ loadNotebook s = hPutStrLn (ghciInput s) ":r"
 
 writeConsole :: State -> Notebook -> IO ()
 writeConsole s n = do
-  let d = "display (" ++ console n ++ ")"
-  hPutStrLn (ghciInput s) d
+  hPutStrLn (ghciInput s) (console n)
   hFlush (ghciInput s)
 
 readConsole :: State -> IO String

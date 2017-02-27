@@ -41,6 +41,7 @@ executable haskelldo-core
                      , vinyl
                      , blaze-html
                      , blaze-markup
+                     , data-default-class
   other-modules:       WebSocketServer
                      , Types
                      , Interpreter

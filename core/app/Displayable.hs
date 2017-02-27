@@ -3,8 +3,15 @@
 module Displayable where 
 
 import DisplayTypes 
+import System.Directory 
+import System.FilePath (pathSeparator)
 import Data.Functor.Identity
+import Data.Default.Class
+import Control.Exception
+import System.IO.Unsafe (unsafePerformIO)
 import Frames
+import Graphics.Rendering.Chart.Renderable 
+import Graphics.Rendering.Chart.Backend.Diagrams 
 import Data.Vinyl.TypeLevel (RecAll)
 import Text.Blaze.Html5 (toHtml)
 import Text.Blaze.Html.Renderer.Text (renderHtml)
@@ -17,6 +24,24 @@ instance (RecAll V.Identity r Show, ColumnHeaders r, AsVinyl r) => Displayable (
   display rec = Display DisplayHtml html 
     where 
       html = (T.unpack . T.concat . toChunks . renderHtml) (toHtml $ show rec)
+
+instance Displayable (Renderable a) where 
+  display r = unsafePerformIO ret 
+    where 
+      ret = do 
+        fp <- storeChart r 
+        return $ Display DisplayChart fp 
+
+-- Chart helper functions for storing and retrieving FilePath
+tmpDir :: IO () 
+tmpDir = createDirectoryIfMissing False ".tmpImages"
+  
+storeChart :: Renderable a -> IO FilePath 
+storeChart c = do 
+  tmpDir 
+  let filename = ".haskll-do-chart.svg"
+  renderableToFile def filename c
+  return $ ".tmpImages" ++ [pathSeparator] ++ filename
 
 -- Instances which should just be displayed by the console as usual
 -- Lovingly referred to as the "Show" instances

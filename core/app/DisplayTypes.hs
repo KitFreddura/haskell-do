@@ -19,6 +19,7 @@ class Displayable a where
 data DisplayType
   = DisplayText
   | DisplayHtml
+  | DisplayChart 
   deriving Generic
 
 -- |
