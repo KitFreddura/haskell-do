@@ -68,6 +68,10 @@ test-suite haskelldo-test
                      , directory
                      , split
                      , mtl
+                     , Chart 
+                     , Chart-diagrams 
+                     , quickcheck-text
+                     , data-default-class
   other-modules:       DisplayTypes
                      , Displayable
                      , Types 

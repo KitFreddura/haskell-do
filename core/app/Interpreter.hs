@@ -23,7 +23,6 @@ getCellText :: Cell -> Text
 getCellText c = case cellType c of
   TextCell    -> T.unlines $ map (mappend "-- ") (T.lines $ cellContent c)
   CodeCell    -> cellContent c
-  DisplayCell -> mempty
 
 formatNotebook :: Notebook -> Text
 formatNotebook = T.unlines . map getCellText . cells

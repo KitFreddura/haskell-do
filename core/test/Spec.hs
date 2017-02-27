@@ -3,6 +3,8 @@ import Interpreter
 import DisplayTypes
 import Displayable
 import Data.Char
+import qualified Data.Text as T 
+import Data.Text.Arbitrary
 import Data.Aeson
 import Test.QuickCheck
 
@@ -10,9 +12,15 @@ import Test.QuickCheck
 instance Arbitrary DisplayType where 
   arbitrary = elements [DisplayText, DisplayHtml]
 
+instance Arbitrary CellType where 
+  arbitrary = elements [TextCell, CodeCell]
+
+instance Arbitrary Cell where 
+  arbitrary = Cell <$> arbitrary <*> arbitrary <*> arbitrary
+
 instance Arbitrary Notebook where 
   arbitrary = Notebook <$> arbitrary <*> arbitrary <*> arbitrary
-              <*> arbitrary <*> return [] <*> arbitrary <*> arbitrary
+              <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
               <*> arbitrary
 
 instance Arbitrary Display where 

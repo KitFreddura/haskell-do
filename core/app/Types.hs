@@ -51,7 +51,6 @@ instance ToJSON Cell where
 data CellType
     = TextCell
     | CodeCell
-    | DisplayCell
     deriving (Generic, Show, Eq)
 
 instance FromJSON CellType
