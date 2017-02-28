@@ -11,6 +11,7 @@ const BrowserWindow = electron.BrowserWindow // This is a Module that creates wi
 const appRoot = require('app-root-path');
 var syncspawn = require('child_process').execSync;
 var spawn = require('child_process').exec;
+var fs = require('fs')
 var coreProcess;
 
 let mainWindow // saves a global reference to mainWindow so it doesn't get garbage collected
@@ -68,6 +69,8 @@ function startBackend(path){
     separator = "/"
   }
   var dirpath = path.substring(0,path.lastIndexOf(separator)+1);
+  var cabal = new RegExp('*.cabal')
+  
   coreProcess = spawn("cd " + dirpath + " && " + corePath + " \"" + path) //cd into directory and then load file
   setTimeout(function(){}, 3000)
   return coreProcess
