@@ -33,3 +33,4 @@ chart = toRenderable layout
                               toPlot sinusoid2]
            $ def
 
+plotter = renderableToFile def "example1.png" chart 

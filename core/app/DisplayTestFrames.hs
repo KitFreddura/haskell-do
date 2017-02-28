@@ -29,10 +29,9 @@ loadMovies = inCoreAoS movieStream
 
 miniUser :: User -> Record '[Occupation, Gender, Age]
 miniUser = rcast
-
 -- to get a record run in the repl
 -- import qualified Data.Foldable as F 
 -- ms <- loadMovies
 -- let u = take 1 . F.toList $ fmap miniUser ms 
--- then you can run display u 
+-- then you can run display u
 
