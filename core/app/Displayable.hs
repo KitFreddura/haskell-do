@@ -14,7 +14,7 @@ import Graphics.Rendering.Chart.Renderable
 import Graphics.Rendering.Chart.Backend.Diagrams 
 import Data.Vinyl.TypeLevel (RecAll)
 import Text.Blaze.Html5 (toHtml)
-import Text.Blaze.Html.Renderer.Text (renderHtml)
+import Text.Blaze.Html.Renderer.Pretty (renderHtml)
 import Data.Text.Lazy (toChunks)
 import qualified Data.Vinyl.Functor as V
 import qualified Data.Text as T
@@ -23,7 +23,7 @@ import qualified Data.Text as T
 instance (RecAll V.Identity r Show, ColumnHeaders r, AsVinyl r) => Displayable (Record r) where
   display rec = Display DisplayHtml html 
     where 
-      html = (T.unpack . T.concat . toChunks . renderHtml) (toHtml $ show rec)
+      html = renderHtml $ toHtml $ show rec
 
 instance Displayable (Renderable a) where 
   display r = unsafePerformIO ret 
@@ -63,8 +63,8 @@ instance Displayable Char where
 instance Displayable T.Text where 
   display t = Display DisplayText (T.unpack t)
 
-instance (Show a) => Displayable [a] where 
-  display lst = Display DisplayText (show lst)
+instance (Displayable a) => Displayable [a] where 
+  display lst = Display DisplayText (show $ fmap display lst)
 
 instance (Show a) => Displayable (Maybe a) where 
   display m = Display DisplayText (show m)
