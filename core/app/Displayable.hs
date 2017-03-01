@@ -39,9 +39,9 @@ tmpDir = createDirectoryIfMissing False ".tmpImages"
 storeChart :: Renderable a -> IO FilePath 
 storeChart c = do 
   tmpDir 
-  let filename = ".haskll-do-chart.svg"
+  let filename = ".tmpImages" ++ [pathSeparator] ++ ".haskell-do-chart.svg"
   renderableToFile def filename c
-  return $ ".tmpImages" ++ [pathSeparator] ++ filename
+  return filename
 
 -- Instances which should just be displayed by the console as usual
 -- Lovingly referred to as the "Show" instances
