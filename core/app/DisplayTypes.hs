@@ -20,6 +20,7 @@ data DisplayType
   = DisplayText
   | DisplayHtml
   | DisplayChart 
+  | DisplayList
   deriving Generic
 
 -- |
@@ -41,4 +42,5 @@ instance FromJSON Display
 -- Allows arbitrart Display types to be printed in the console
 -- JSON was chosen for an easy format for the front-end of HaskellDO to parse
 instance Show Display where
-  show = show . toEncoding
+  show (Display DisplayList lst) = lst
+  show d = show $ toEncoding $ content d
